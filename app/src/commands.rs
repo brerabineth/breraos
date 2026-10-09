@@ -126,11 +126,14 @@ pub async fn proxy_start(
     port: Option<u16>,
     state: State<'_, AppState>,
 ) -> CmdResult<ProxySnapshot> {
-    let existing = state.proxy.lock();
-    if let Some(running) = existing.as_ref() {
-        return Ok(running.snapshot());
+    // guard scope must END before the await point: MutexGuard is not Send,
+    // and the future must be (tauri runs command futures across threads)
+    {
+        let guard = state.proxy.lock();
+        if let Some(running) = guard.as_ref() {
+            return Ok(running.snapshot());
+        }
     }
-    drop(existing);
 
     let cfg = ProxyConfig {
         port,

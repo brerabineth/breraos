@@ -9,6 +9,9 @@ mod state;
 
 use state::AppState;
 
+// Manager provides get_webview_window used in setup below
+use tauri::Manager as _;
+
 fn main() {
     if let Err(fatal) = run() {
         eprintln!("breraos: fatal: {fatal}");
