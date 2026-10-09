@@ -1,0 +1,16 @@
+[workspace]
+resolver = "2"
+members = ["crates/brera-core", "app"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+authors = ["Brerabin"]
+repository = "https://github.com/brerabineth/breraos"
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+strip = true
