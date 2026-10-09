@@ -1,0 +1,12 @@
+# rust
+target/
+**/*.rs.bk
+
+# node
+node_modules/
+ui/dist/
+
+# local
+*.log
+.DS_Store
+Thumbs.db
